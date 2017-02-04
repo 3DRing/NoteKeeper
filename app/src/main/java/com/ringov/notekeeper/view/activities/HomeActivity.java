@@ -42,15 +42,6 @@ public class HomeActivity extends StorageMenuActivity {
         fragment.setBaseView(this);
         view = fragment;
         startFragment(fragment);
-
-        initializeData();
-    }
-
-    private void initializeData() {
-        // todo change testset to the real one
-        List<NoteEntry> notes = new ArrayList<>();
-        notes.add(new NoteEntry(0,"Первая заметка",new Date()));
-        view.showNoteList(notes);
     }
 
     @Override

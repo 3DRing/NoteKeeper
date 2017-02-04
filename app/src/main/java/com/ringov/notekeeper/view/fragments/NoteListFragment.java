@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ringov.notekeeper.presenter.PresenterManager;
+import com.ringov.notekeeper.presenter.note_list.NoteListControl;
 import com.ringov.notekeeper.view.interfaces.EntryClick;
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.view.NoteListAdapter;
@@ -31,14 +33,22 @@ public class NoteListFragment extends BaseFragment implements NoteListView{
     private NoteListAdapter adapter;
     private List<NoteEntry> tmpList;
 
+    private NoteListControl noteListControl;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.note_list_fragment,container, false);
 
+        noteListControl = PresenterManager.getNoteListControl(this);
         initializeRecyclerView(view);
+        initializeData();
 
         return view;
+    }
+
+    private void initializeData() {
+        noteListControl.loadNoteList();
     }
 
     private void initializeRecyclerView(View view){
