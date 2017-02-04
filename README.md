@@ -1,0 +1,1 @@
+Simple implementation of a note keeper, as a test task.
