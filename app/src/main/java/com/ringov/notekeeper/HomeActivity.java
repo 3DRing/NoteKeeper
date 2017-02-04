@@ -3,13 +3,20 @@ package com.ringov.notekeeper;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private FloatingActionButton fab;
+    private FrameLayout fragmentContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +25,20 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        // order matters
+        bindViews();
+        setupListeners();
+        //-----------
+
+        // start initial fragment
+        startFragment(new NoteListFragment());
+    }
+
+    private void bindViews(){
+        fragmentContainer = (FrameLayout) findViewById(R.id.fragment_container);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+    }
+    private void setupListeners(){
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -26,6 +46,13 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private void startFragment(Fragment fragment){
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.fragment_container, fragment);
+        transaction.commit();
     }
 
     @Override
@@ -45,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_change_storage) {
             ChangeStorageDialog changeStorageDialog = new ChangeStorageDialog();
-            changeStorageDialog.show(getSupportFragmentManager(),"change_storage_dialog");
+            changeStorageDialog.show(getSupportFragmentManager(),"change_storage_dialog");  //TODO remove hardcoded text
             return true;
         }
 
