@@ -5,7 +5,7 @@ import com.ringov.notekeeper.model.ModelManager;
 import com.ringov.notekeeper.model.interfaces.SettingsModelAccess;
 import com.ringov.notekeeper.presenter.base.BasePresenter;
 import com.ringov.notekeeper.view.interfaces.SettingsView;
-import com.ringov.notekeeper.view.interfaces.SharedPreferencesProvider;
+import com.ringov.notekeeper.presenter.SharedPreferencesProvider;
 
 /**
  * Created by Сергей on 04.02.2017.

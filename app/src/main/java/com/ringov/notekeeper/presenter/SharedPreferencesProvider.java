@@ -1,4 +1,4 @@
-package com.ringov.notekeeper.view.interfaces;
+package com.ringov.notekeeper.presenter;
 
 import android.content.SharedPreferences;
 

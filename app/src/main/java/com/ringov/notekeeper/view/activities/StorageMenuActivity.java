@@ -14,7 +14,7 @@ import com.ringov.notekeeper.presenter.PresenterManager;
 import com.ringov.notekeeper.presenter.settings.SettingsControl;
 import com.ringov.notekeeper.view.fragments.ChangeStorageDialog;
 import com.ringov.notekeeper.view.interfaces.SettingsView;
-import com.ringov.notekeeper.view.interfaces.SharedPreferencesProvider;
+import com.ringov.notekeeper.presenter.SharedPreferencesProvider;
 
 /**
  * Created by Сергей on 04.02.2017.

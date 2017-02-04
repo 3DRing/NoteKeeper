@@ -1,5 +1,6 @@
 package com.ringov.notekeeper.view.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ringov.notekeeper.presenter.ContextProvider;
 import com.ringov.notekeeper.presenter.PresenterManager;
 import com.ringov.notekeeper.presenter.note_list.NoteListControl;
 import com.ringov.notekeeper.view.interfaces.EntryClick;
@@ -25,7 +27,7 @@ import java.util.List;
  * Created by Сергей on 04.02.2017.
  */
 
-public class NoteListFragment extends BaseFragment implements NoteListView{
+public class NoteListFragment extends BaseFragment implements NoteListView, ContextProvider{
 
     public static String TAG = "NoteListFragment";
 
@@ -48,7 +50,7 @@ public class NoteListFragment extends BaseFragment implements NoteListView{
     }
 
     private void initializeData() {
-        noteListControl.loadNoteList();
+        noteListControl.loadNoteList(this);
     }
 
     private void initializeRecyclerView(View view){
@@ -98,5 +100,10 @@ public class NoteListFragment extends BaseFragment implements NoteListView{
     @Override
     public void setBaseView(BaseView baseViewProvider) {
         this.baseViewProvider = baseViewProvider;
+    }
+
+    @Override
+    public Context extractContext() {
+        return getContext();
     }
 }
