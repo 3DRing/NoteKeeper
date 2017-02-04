@@ -8,4 +8,6 @@ import com.ringov.notekeeper.presenter.NoteEntry;
 
 public interface SingleNoteView extends BaseView {
     void showNote(NoteEntry note);
+    void successCommit();
+    void failedCommit();
 }

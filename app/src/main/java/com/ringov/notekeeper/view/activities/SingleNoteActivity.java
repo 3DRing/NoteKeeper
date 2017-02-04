@@ -12,12 +12,16 @@ import android.widget.TextView;
 
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.R;
+import com.ringov.notekeeper.presenter.PresenterManager;
+import com.ringov.notekeeper.presenter.single_note.SingleNoteControl;
+import com.ringov.notekeeper.view.interfaces.SingleNoteView;
 
 import java.util.Date;
 
-public class SingleNoteActivity extends StorageMenuActivity {
+public class SingleNoteActivity extends StorageMenuActivity implements SingleNoteView{
 
     private NoteEntry entry;
+    private SingleNoteEntry localEntry;
     private boolean editMode;
 
     private TextView tvTitle;
@@ -29,10 +33,15 @@ public class SingleNoteActivity extends StorageMenuActivity {
     private Toolbar toolbar;
     private FloatingActionButton fab;
 
+    private SingleNoteControl singleNoteControl;
+    private boolean creating;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_note_activity);
+
+        singleNoteControl = PresenterManager.getSingleNoteControl(this);
 
         bindViews();
         initializeListeners();
@@ -41,21 +50,22 @@ public class SingleNoteActivity extends StorageMenuActivity {
         editMode = intent.getBooleanExtra("edit_mode", false); //todo remove hardcoded text
         entry = (NoteEntry) intent.getSerializableExtra("entry"); // todo remove hardcoded text
 
-        runInterface(editMode);
-
         if(!editMode) {
-            fillNoteData(entry);
+            initializeNoteData(entry);
+        }else{
+            creating = true;
+            localEntry = SingleNoteEntry.emptyNoteEntry();
         }
-
+        changeMode(editMode);
     }
 
-    private void fillNoteData(NoteEntry note) {
+    private void initializeNoteData(NoteEntry note) {
         if(note == null){
             //todo unexpected behaviour, handle somehow
             return;
         }
-        this.tvTitle.setText(note.getTitle());
-        this.tvText.setText(note.getText());
+        this.localEntry = new SingleNoteEntry(note);
+        showNote(localEntry);
     }
 
     @Override
@@ -78,41 +88,102 @@ public class SingleNoteActivity extends StorageMenuActivity {
             @Override
             public void onClick(View view) {
                 editMode = !editMode;
-                runInterface(editMode);
+                changeMode(editMode);
                 if(!editMode){
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+                    updateLocalEntry();
+                    showNote(localEntry);
+                    singleNoteControl.commitNote(localEntry,creating);
+                }else{
+                    beginChangeLocalEntry();
                 }
             }
         });
     }
 
-    private void runInterface(boolean editMode){
-        if(editMode) {
+    private void beginChangeLocalEntry(){
+        this.etTitle.setText(localEntry.getTitle());
+        this.etText.setText(localEntry.getText());
+    }
+
+    private void updateLocalEntry(){
+        localEntry.setTitle(this.etTitle.getText().toString());
+        localEntry.setDate(new Date());
+        localEntry.setText(this.etText.getText().toString());
+    }
+
+    private void changeMode(boolean editMode) {
+        if (editMode) {
             // Toolbar
             tvTitle.setVisibility(View.GONE);
             tvDate.setVisibility(View.GONE);
             etTitle.setVisibility(View.VISIBLE);
             etTitle.requestFocus();
-            etTitle.setText(tvTitle.getText().toString());
 
             // Content field
             tvText.setVisibility(View.GONE);
             etText.setVisibility(View.VISIBLE);
-            etText.setText(tvText.getText().toString());
-        }else{
+        } else {
             // Toolbar
             tvTitle.setVisibility(View.VISIBLE);
             tvDate.setVisibility(View.VISIBLE);
             etTitle.setVisibility(View.GONE);
 
-            tvTitle.setText(etTitle.getText().toString());
-            tvDate.setText(NoteEntry.getSimpleDateFormat().format(new Date())); //todo change to more unified way
-
             // Content field
             tvText.setVisibility(View.VISIBLE);
             etText.setVisibility(View.GONE);
-            tvText.setText(etText.getText().toString());
+        }
+    }
+
+    @Override
+    public void showNote(NoteEntry note) {
+        tvTitle.setText(note.getTitle());
+        tvDate.setText(note.getFormattedDate());
+        tvText.setText(note.getText());
+    }
+
+    @Override
+    public void successCommit() {
+        if(creating){
+            creating = false;
+            showMessage("Successfully created");
+        }else{
+            showMessage("Successfully edited");
+        }
+    }
+
+    @Override
+    public void failedCommit() {
+        if(creating){
+            showMessage("Failed creating");
+        }else{
+            showMessage("Failed editing");
+        }
+    }
+
+    private static class SingleNoteEntry extends NoteEntry{
+
+        public SingleNoteEntry(int id, String title, Date date) {
+            super(id, title, date);
+        }
+
+        public SingleNoteEntry(NoteEntry note) {
+            super(note.getId(),note.getTitle(),note.getDate());
+            this.setText(note.getText());
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public void setDate(Date date) {
+            this.date = date;
+        }
+
+        public static SingleNoteActivity.SingleNoteEntry emptyNoteEntry() {
+            return new SingleNoteEntry(-1, "", new Date()); // -1 means this entry should be created
         }
     }
 }
