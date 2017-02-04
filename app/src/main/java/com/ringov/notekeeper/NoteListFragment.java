@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ringov.notekeeper.view.SingleNoteActivity;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
