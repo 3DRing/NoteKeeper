@@ -1,4 +1,4 @@
-package com.ringov.notekeeper;
+package com.ringov.notekeeper.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,6 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.ringov.notekeeper.NoteEntry;
+import com.ringov.notekeeper.R;
+import com.ringov.notekeeper.view.interfaces.EntryClick;
 
 import java.util.ArrayList;
 import java.util.List;

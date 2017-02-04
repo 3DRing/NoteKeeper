@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.ringov.notekeeper.view.HomeActivity"
+    tools:context="com.ringov.notekeeper.view.activities.HomeActivity"
     tools:showIn="@layout/activity_home">
 
     <FrameLayout

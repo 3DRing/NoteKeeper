@@ -1,21 +1,19 @@
-package com.ringov.notekeeper.view;
+package com.ringov.notekeeper.view.activities;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.ringov.notekeeper.ChangeStorageDialog;
 import com.ringov.notekeeper.R;
+import com.ringov.notekeeper.view.ChangeStorageDialog;
+import com.ringov.notekeeper.view.interfaces.BaseView;
 
 /**
  * Created by Сергей on 04.02.2017.
  */
 
-public abstract class StorageMenuActivity extends AppCompatActivity {
+public abstract class StorageMenuActivity extends AppCompatActivity implements BaseView{
 
     protected abstract void bindViews();
     protected abstract void initializeListeners();
@@ -42,5 +40,20 @@ public abstract class StorageMenuActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoading(String message) {
+        // todo implement
+    }
+
+    @Override
+    public void stopLoading() {
+        // todo implement
     }
 }

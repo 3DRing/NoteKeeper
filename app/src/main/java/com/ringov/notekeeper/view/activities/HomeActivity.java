@@ -1,4 +1,4 @@
-package com.ringov.notekeeper.view;
+package com.ringov.notekeeper.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +9,23 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import com.ringov.notekeeper.NoteListFragment;
+import com.ringov.notekeeper.NoteEntry;
 import com.ringov.notekeeper.R;
+import com.ringov.notekeeper.view.fragments.NoteListFragment;
+import com.ringov.notekeeper.view.interfaces.NoteListView;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class HomeActivity extends StorageMenuActivity {
 
     private FloatingActionButton fab;
     private FrameLayout fragmentContainer;
     private Toolbar toolbar;
+
+    private NoteListView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +38,19 @@ public class HomeActivity extends StorageMenuActivity {
         //-----------
 
         // start initial fragment
-        startFragment(new NoteListFragment());
+        NoteListFragment fragment = new NoteListFragment();
+        fragment.setBaseView(this);
+        view = fragment;
+        startFragment(fragment);
+
+        initializeData();
+    }
+
+    private void initializeData() {
+        // todo change testset to the real one
+        List<NoteEntry> notes = new ArrayList<>();
+        notes.add(new NoteEntry(0,"Первая заметка",new Date()));
+        view.showNoteList(notes);
     }
 
     @Override

@@ -7,7 +7,7 @@ import android.support.annotation.ArrayRes;
  */
 
 public class StorageMap {
-    enum STORAGE_TYPE {SHARED_PREFERENCES, SQLITE_DATABASE, SDCARD_FILE}
+    public enum STORAGE_TYPE {SHARED_PREFERENCES, SQLITE_DATABASE, SDCARD_FILE}
 
     @ArrayRes
     public static int getStorageTypeArrayRes(){

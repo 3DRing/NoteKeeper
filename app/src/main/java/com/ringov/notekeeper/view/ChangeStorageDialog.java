@@ -1,4 +1,4 @@
-package com.ringov.notekeeper;
+package com.ringov.notekeeper.view;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -8,6 +8,9 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
+
+import com.ringov.notekeeper.R;
+import com.ringov.notekeeper.StorageMap;
 
 /**
  * Created by Сергей on 04.02.2017.

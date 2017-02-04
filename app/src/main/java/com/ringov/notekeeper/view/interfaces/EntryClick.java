@@ -1,4 +1,6 @@
-package com.ringov.notekeeper;
+package com.ringov.notekeeper.view.interfaces;
+
+import com.ringov.notekeeper.NoteEntry;
 
 /**
  * Created by Сергей on 04.02.2017.

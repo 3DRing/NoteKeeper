@@ -1,21 +1,18 @@
-package com.ringov.notekeeper.view;
+package com.ringov.notekeeper.view.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.ringov.notekeeper.EntryClick;
 import com.ringov.notekeeper.NoteEntry;
 import com.ringov.notekeeper.R;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SingleNoteActivity extends StorageMenuActivity {
