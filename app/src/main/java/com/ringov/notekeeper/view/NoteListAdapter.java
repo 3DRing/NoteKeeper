@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ringov.notekeeper.NoteEntry;
+import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.R;
 import com.ringov.notekeeper.view.interfaces.EntryClick;
 

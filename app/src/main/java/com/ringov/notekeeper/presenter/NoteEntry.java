@@ -1,4 +1,4 @@
-package com.ringov.notekeeper;
+package com.ringov.notekeeper.presenter;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

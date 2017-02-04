@@ -1,6 +1,6 @@
 package com.ringov.notekeeper.view.interfaces;
 
-import com.ringov.notekeeper.NoteEntry;
+import com.ringov.notekeeper.presenter.NoteEntry;
 
 import java.util.List;
 
