@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">NoteKeeper</string>
-    <string name="action_settings">Settings</string>
+    <string name="change_storage">Change Storage</string>
+    <array name="storage_list">
+        <item>SharedPreferences</item>
+        <item>SQLite Database</item>
+        <item>SDCard File</item>
+    </array>
 </resources>

@@ -43,7 +43,9 @@ public class HomeActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_change_storage) {
+            ChangeStorageDialog changeStorageDialog = new ChangeStorageDialog();
+            changeStorageDialog.show(getSupportFragmentManager(),"change_storage_dialog");
             return true;
         }
 
