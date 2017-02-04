@@ -1,5 +1,6 @@
 package com.ringov.notekeeper;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 public class SingleNoteActivity extends AppCompatActivity {
@@ -53,12 +55,17 @@ public class SingleNoteActivity extends AppCompatActivity {
                 if(!editMode) {
                     tvTitle.setVisibility(View.GONE);
                     etTitle.setVisibility(View.VISIBLE);
+                    etTitle.requestFocus();
                     etTitle.getEditText().setText(tvTitle.getText().toString());
                     editMode = true;
                 }else{
                     etTitle.setVisibility(View.GONE);
                     tvTitle.setVisibility(View.VISIBLE);
                     tvTitle.setText(etTitle.getEditText().getText().toString());
+
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
                     editMode = false;
                 }
             }
