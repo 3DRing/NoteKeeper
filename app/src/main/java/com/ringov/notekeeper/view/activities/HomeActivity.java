@@ -8,21 +8,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.Toast;
 
-import com.ringov.notekeeper.presenter.NoteEntry;
+import com.ringov.notekeeper.StorageMap;
 import com.ringov.notekeeper.R;
 import com.ringov.notekeeper.view.fragments.NoteListFragment;
 import com.ringov.notekeeper.view.interfaces.NoteListView;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class HomeActivity extends StorageMenuActivity {
 
     private FloatingActionButton fab;
-    private FrameLayout fragmentContainer;
     private Toolbar toolbar;
 
     private NoteListView view;
@@ -46,7 +41,6 @@ public class HomeActivity extends StorageMenuActivity {
 
     @Override
     protected void bindViews(){
-        fragmentContainer = (FrameLayout) findViewById(R.id.fragment_container);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,7 +51,7 @@ public class HomeActivity extends StorageMenuActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, SingleNoteActivity.class);
-                intent.putExtra("edit_mode", true);
+                intent.putExtra("edit_mode", true); // todo remove hardcoded text
                 startActivity(intent);
             }
         });

@@ -1,5 +1,6 @@
 package com.ringov.notekeeper.view.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,14 +12,15 @@ import com.ringov.notekeeper.R;
 import com.ringov.notekeeper.StorageMap;
 import com.ringov.notekeeper.presenter.PresenterManager;
 import com.ringov.notekeeper.presenter.settings.SettingsControl;
-import com.ringov.notekeeper.view.ChangeStorageDialog;
+import com.ringov.notekeeper.view.fragments.ChangeStorageDialog;
 import com.ringov.notekeeper.view.interfaces.SettingsView;
+import com.ringov.notekeeper.view.interfaces.SharedPreferencesProvider;
 
 /**
  * Created by Сергей on 04.02.2017.
  */
 
-public abstract class StorageMenuActivity extends AppCompatActivity implements SettingsView{
+public abstract class StorageMenuActivity extends AppCompatActivity implements SettingsView, SharedPreferencesProvider {
 
     protected abstract void bindViews();
     protected abstract void initializeListeners();
@@ -53,7 +55,8 @@ public abstract class StorageMenuActivity extends AppCompatActivity implements S
 
                 @Override
                 public void changeStorageType(StorageMap.STORAGE_TYPE type) {
-                    settingsControl.changeStorageType(type);
+                    settingsControl.changeStorageType(type,
+                            StorageMenuActivity.this); //todo remove hardcoded text
                 }
             });
             changeStorageDialog.setArguments(b);
@@ -77,5 +80,10 @@ public abstract class StorageMenuActivity extends AppCompatActivity implements S
     @Override
     public void stopLoading() {
         // todo implement
+    }
+
+    @Override
+    public SharedPreferences getSharedPreferences(String name) {
+        return this.getSharedPreferences(name, MODE_PRIVATE);
     }
 }

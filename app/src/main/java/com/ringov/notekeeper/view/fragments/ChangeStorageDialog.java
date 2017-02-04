@@ -1,4 +1,4 @@
-package com.ringov.notekeeper.view;
+package com.ringov.notekeeper.view.fragments;
 
 import android.app.Dialog;
 import android.content.DialogInterface;

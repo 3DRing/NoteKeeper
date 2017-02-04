@@ -7,6 +7,29 @@ import android.support.annotation.ArrayRes;
  */
 
 public class StorageMap {
+    public static int getStorageId(STORAGE_TYPE type) {
+        int id = 0;
+        switch (type){
+            case SHARED_PREFERENCES:
+                id = 0;
+                break;
+            case SQLITE_DATABASE:
+                id = 1;
+                break;
+            case SDCARD_FILE:
+                id = 2;
+                break;
+            default:
+                id = 0;
+                break;
+        }
+        return id;
+    }
+
+    public static String getTypeName(STORAGE_TYPE checkType) {
+        return checkType.toString(); // todo set actual names
+    }
+
     public enum STORAGE_TYPE {SHARED_PREFERENCES, SQLITE_DATABASE, SDCARD_FILE}
 
     @ArrayRes
