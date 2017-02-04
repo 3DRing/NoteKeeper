@@ -88,9 +88,7 @@ public class SingleNoteActivity extends StorageMenuActivity implements SingleNot
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editMode = !editMode;
-                changeMode(editMode);
-                if(!editMode){
+                if(editMode){
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
@@ -98,6 +96,8 @@ public class SingleNoteActivity extends StorageMenuActivity implements SingleNot
                     showNote(localEntry);
                     singleNoteControl.commitNote(localEntry,creating, SingleNoteActivity.this);
                 }else{
+                    editMode = !editMode;
+                    changeMode(editMode);
                     beginChangeLocalEntry();
                 }
             }
@@ -147,12 +147,16 @@ public class SingleNoteActivity extends StorageMenuActivity implements SingleNot
 
     @Override
     public void successCommit() {
+        editMode = !editMode;
+        changeMode(editMode);
+
         if(creating){
             creating = false;
             showMessage("Successfully created");
         }else{
             showMessage("Successfully edited");
         }
+        setResult(RESULT_OK);
     }
 
     @Override
@@ -162,6 +166,7 @@ public class SingleNoteActivity extends StorageMenuActivity implements SingleNot
         }else{
             showMessage("Failed editing");
         }
+        setResult(RESULT_CANCELED);
     }
 
     @Override

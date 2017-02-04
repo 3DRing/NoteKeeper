@@ -62,15 +62,16 @@ public class BaseModel
     }
 
     @Override
-    public void addNote(NoteEntry note, ContextProvider contextProvider) {
-        boolean success = dbInterface.addNote(note,contextProvider);
-        singleNoteModelControl.createdSuccessfully(success);
-    }
+    public void commitNote(NoteEntry note, boolean creating, ContextProvider contextProvider) {
+        boolean success;
+        if(creating) {
+            success = dbInterface.addNote(note, contextProvider);
+            singleNoteModelControl.createdSuccessfully(success);
+        }else {
+            success = dbInterface.editNote(note, contextProvider);
+            singleNoteModelControl.editedSuccessfully(success);
+        }
 
-    @Override
-    public void editNote(int id, ContextProvider contextProvider) {
-        boolean success = dbInterface.editNote(id, contextProvider);
-        singleNoteModelControl.editedSuccessfully(success);
     }
 
     public void setSingleNoteModelControl(SingleNoteModelControl singleNoteModelControl) {

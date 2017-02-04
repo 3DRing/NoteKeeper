@@ -40,8 +40,8 @@ public class SQLiteDB implements DBInterface {
     }
 
     @Override
-    public boolean editNote(int id, ContextProvider contextProvider) {
-        return getInstance(contextProvider).editNote(id);
+    public boolean editNote(NoteEntry note, ContextProvider contextProvider) {
+        return getInstance(contextProvider).editNote(note);
     }
 
     private class SQLiteHelper extends SQLiteOpenHelper{
@@ -83,12 +83,27 @@ public class SQLiteDB implements DBInterface {
             insertValues.put("text", note.getText());
 
             long result = db.insert(TABLE_NAME, null, insertValues);
-            if(result != -1){
-                SettingsModel.setNextNoteId(contextProvider, crtId+1);
-                return true;
-            }else{
-                return false;
+            if(result != -1) {
+                SettingsModel.setNextNoteId(contextProvider, crtId + 1);
             }
+
+            db.close();
+            return result != -1; // false if inserting was failed
+        }
+
+        public boolean editNote(NoteEntry note) {
+            SQLiteDatabase db = getWritableDatabase();
+
+            ContentValues updatedValues = new ContentValues();
+            int id = note.getId();
+
+            updatedValues.put("title", note.getTitle());
+            updatedValues.put("date", note.getDate().getTime());
+            updatedValues.put("text", note.getText());
+
+            int result = db.update(TABLE_NAME, updatedValues, "_id="+id, null);
+
+            return result != -1;
         }
 
         public List<NoteEntry> getNoteList(){
@@ -112,12 +127,8 @@ public class SQLiteDB implements DBInterface {
                     cursor.moveToNext();
                 }
             }
+            db.close();
             return notes;
-        }
-
-        public boolean editNote(int id) {
-            // TODO implement
-            return false;
         }
     }
 }

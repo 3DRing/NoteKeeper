@@ -69,8 +69,8 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteLi
         }
     }
 
-    public void addAll(List<NoteEntry> noteList){
-        notes.addAll(noteList);
+    public void updateAll(List<NoteEntry> noteList){
+        notes = noteList;
         notifyDataSetChanged();
     }
 }

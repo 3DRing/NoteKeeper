@@ -8,6 +8,5 @@ import com.ringov.notekeeper.presenter.NoteEntry;
  */
 
 public interface SingleNoteModelAccess extends BaseModelAccess {
-    void addNote(NoteEntry note, ContextProvider contextProvider);
-    void editNote(int id, ContextProvider contextProvider);
+    void commitNote(NoteEntry note, boolean creating, ContextProvider contextProvider);
 }

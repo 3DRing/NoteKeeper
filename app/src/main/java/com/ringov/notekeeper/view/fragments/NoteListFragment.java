@@ -62,13 +62,13 @@ public class NoteListFragment extends BaseFragment implements NoteListView, Cont
             public void handle(NoteEntry entry) {
                 Intent intent = new Intent(getContext(), SingleNoteActivity.class);
                 intent.putExtra("entry", entry); // todo remove hardcoded text
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
         rv.setAdapter(adapter);
         if(tmpList != null){
-            adapter.addAll(tmpList);
+            adapter.updateAll(tmpList);
             tmpList = null;
         }
     }
@@ -76,10 +76,15 @@ public class NoteListFragment extends BaseFragment implements NoteListView, Cont
     @Override
     public void showNoteList(List<NoteEntry> noteList) {
         if(adapter != null) {
-            adapter.addAll(noteList);
+            adapter.updateAll(noteList);
         }else{
             tmpList = noteList;
         }
+    }
+
+    @Override
+    public void update() {
+        noteListControl.loadNoteList(this);
     }
 
     @Override

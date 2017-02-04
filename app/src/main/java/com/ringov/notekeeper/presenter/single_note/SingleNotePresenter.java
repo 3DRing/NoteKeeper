@@ -19,11 +19,7 @@ public class SingleNotePresenter extends BasePresenter<SingleNoteView, SingleNot
 
     @Override
     public void commitNote(NoteEntry entry, boolean creating, ContextProvider contextProvider) {
-        if(creating) {
-            model.addNote(entry, contextProvider);
-        }else{
-            model.editNote(entry.getId(), contextProvider);
-        }
+        model.commitNote(entry, creating, contextProvider);
     }
 
     @Override

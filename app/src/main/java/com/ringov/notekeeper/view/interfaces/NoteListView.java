@@ -2,6 +2,7 @@ package com.ringov.notekeeper.view.interfaces;
 
 import com.ringov.notekeeper.presenter.NoteEntry;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,4 +11,5 @@ import java.util.List;
 
 public interface NoteListView extends BaseView {
     void showNoteList(List<NoteEntry> noteList);
+    void update();
 }
