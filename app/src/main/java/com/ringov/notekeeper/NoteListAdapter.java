@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,6 +17,11 @@ import java.util.List;
 public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteListHolder> {
     private static final String TAG = "NoteListAdapter";
     private List<NoteEntry> notes = new ArrayList<>();
+    private EntryClick click;
+
+    public NoteListAdapter(EntryClick click){
+        this.click = click;
+    }
 
     @Override
     public NoteListHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,9 +33,16 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteLi
 
     @Override
     public void onBindViewHolder(NoteListHolder holder, int position) {
-        NoteEntry crtNote = notes.get(position);
+        final NoteEntry crtNote = notes.get(position);
         holder.tvTitle.setText(crtNote.getTitle());
         holder.tvDate.setText(crtNote.getFormattedDate());
+
+        holder.llEntry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click.handle(crtNote);
+            }
+        });
     }
 
     @Override
@@ -39,12 +52,14 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteLi
 
     public class NoteListHolder extends RecyclerView.ViewHolder {
 
+        private LinearLayout llEntry;
         public TextView tvTitle;
         public TextView tvDate;
 
         public NoteListHolder(View itemView) {
             super(itemView);
 
+            llEntry = (LinearLayout) itemView.findViewById(R.id.ll_entry);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
             tvDate = (TextView) itemView.findViewById(R.id.tv_date);
         }

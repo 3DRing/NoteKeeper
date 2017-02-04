@@ -1,5 +1,6 @@
 package com.ringov.notekeeper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -37,13 +38,20 @@ public class NoteListFragment extends Fragment {
         rv = (RecyclerView) view.findViewById(R.id.rv_note_list);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        NoteListAdapter adapter = new NoteListAdapter();
+        NoteListAdapter adapter = new NoteListAdapter(new EntryClick() {
+            @Override
+            public void handle(NoteEntry entry) {
+                Intent intent = new Intent(getContext(), SingleNoteActivity.class);
+                intent.putExtra("entry", entry); // todo remove hardcoded text
+                startActivity(intent);
+            }
+        });
 
         rv.setAdapter(adapter);
 
+        // todo change testset to the real one
         List<NoteEntry> notes = new ArrayList<>();
-
-        notes.add(new NoteEntry("Первая заметка",new Date()));
+        notes.add(new NoteEntry(0,"Первая заметка",new Date()));
 
         adapter.addAll(notes);
     }

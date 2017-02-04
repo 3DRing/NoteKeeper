@@ -10,7 +10,8 @@
         android:paddingBottom="@dimen/note_list_entry_padding_vertical"
         android:paddingTop="@dimen/note_list_entry_padding_vertical"
         android:paddingLeft="@dimen/note_list_entry_padding_horizontal"
-        android:paddingRight="@dimen/note_list_entry_padding_horizontal">
+        android:paddingRight="@dimen/note_list_entry_padding_horizontal"
+        android:id="@+id/ll_entry">
 
         <TextView
             android:text="Title"
