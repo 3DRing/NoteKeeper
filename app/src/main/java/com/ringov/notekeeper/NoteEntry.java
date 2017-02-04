@@ -14,6 +14,8 @@ public class NoteEntry implements Serializable{
     private Date date;
     private String text;
 
+    private final static SimpleDateFormat format = new SimpleDateFormat("d MMM yyyy, HH:mm");
+
     public NoteEntry(int id, String title, Date date){
         this.id = id;
         this.title = title;
@@ -29,7 +31,7 @@ public class NoteEntry implements Serializable{
     }
 
     public String getFormattedDate(){
-        SimpleDateFormat format = new SimpleDateFormat("d MMM yyyy, HH:mm");
+
         return format.format(date).toString();
     }
 
@@ -38,5 +40,9 @@ public class NoteEntry implements Serializable{
     }
     public void setText(String text){
         this.text = text;
+    }
+
+    public static SimpleDateFormat getSimpleDateFormat(){
+        return format;
     }
 }

@@ -1,5 +1,6 @@
 package com.ringov.notekeeper.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -45,7 +46,9 @@ public class HomeActivity extends StorageMenuActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(HomeActivity.this, "click", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomeActivity.this, SingleNoteActivity.class);
+                intent.putExtra("edit_mode", true);
+                startActivity(intent);
             }
         });
     }

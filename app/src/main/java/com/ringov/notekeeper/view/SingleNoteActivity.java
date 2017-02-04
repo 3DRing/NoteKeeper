@@ -8,20 +8,26 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ringov.notekeeper.EntryClick;
 import com.ringov.notekeeper.NoteEntry;
 import com.ringov.notekeeper.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class SingleNoteActivity extends StorageMenuActivity {
 
     private NoteEntry entry;
     private boolean editMode;
 
-    private TextInputLayout etTitle;
     private TextView tvTitle;
+    private EditText etTitle;
     private TextView tvText;
+    private EditText etText;
+    private TextView tvDate;
 
     private Toolbar toolbar;
     private FloatingActionButton fab;
@@ -57,9 +63,12 @@ public class SingleNoteActivity extends StorageMenuActivity {
 
     @Override
     protected void bindViews(){
-        etTitle = (TextInputLayout) findViewById(R.id.et_title);
         tvTitle = (TextView) findViewById(R.id.tv_title_single_note);
+        etTitle = (EditText) findViewById(R.id.et_title);
         tvText = (TextView) findViewById(R.id.tv_text);
+        etText = (EditText) findViewById(R.id.et_text);
+        tvDate = (TextView) findViewById(R.id.tv_date_single_note);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -83,14 +92,30 @@ public class SingleNoteActivity extends StorageMenuActivity {
 
     private void runInterface(boolean editMode){
         if(editMode) {
+            // Toolbar
             tvTitle.setVisibility(View.GONE);
+            tvDate.setVisibility(View.GONE);
             etTitle.setVisibility(View.VISIBLE);
             etTitle.requestFocus();
-            etTitle.getEditText().setText(tvTitle.getText().toString());
+            etTitle.setText(tvTitle.getText().toString());
+
+            // Content field
+            tvText.setVisibility(View.GONE);
+            etText.setVisibility(View.VISIBLE);
+            etText.setText(tvText.getText().toString());
         }else{
-            etTitle.setVisibility(View.GONE);
+            // Toolbar
             tvTitle.setVisibility(View.VISIBLE);
-            tvTitle.setText(etTitle.getEditText().getText().toString());
+            tvDate.setVisibility(View.VISIBLE);
+            etTitle.setVisibility(View.GONE);
+
+            tvTitle.setText(etTitle.getText().toString());
+            tvDate.setText(NoteEntry.getSimpleDateFormat().format(new Date())); //todo change to more unified way
+
+            // Content field
+            tvText.setVisibility(View.VISIBLE);
+            etText.setVisibility(View.GONE);
+            tvText.setText(etText.getText().toString());
         }
     }
 }
