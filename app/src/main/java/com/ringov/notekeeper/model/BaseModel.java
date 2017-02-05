@@ -57,6 +57,12 @@ public class BaseModel
         noteListModelControl.sendNoteList(notes);
     }
 
+    @Override
+    public void deleteNote(int id, ContextProvider contextProvider) {
+        boolean success = dbInterface.deleteNote(id, contextProvider);
+        noteListModelControl.deletedSuccessfully(success);
+    }
+
     public void setNoteListModelControl(NoteListModelControl noteListModelControl) {
         this.noteListModelControl = noteListModelControl;
     }

@@ -28,8 +28,25 @@ public class NoteListPresenter extends BasePresenter<NoteListView, NoteListModel
     }
 
     @Override
+    public void deleteNote(int id, ContextProvider contextProvider) {
+        view.stopLoading();
+        model.deleteNote(id, contextProvider);
+    }
+
+    @Override
     public void sendNoteList(List<NoteEntry> notes) {
         view.stopLoading();
         view.showNoteList(notes);
+    }
+
+    @Override
+    public void deletedSuccessfully(boolean success) {
+        view.stopLoading();
+        if(success) {
+            view.showMessage("Successful deletion");
+            view.update();
+        }else{
+            view.showMessage("Deletion failed");
+        }
     }
 }

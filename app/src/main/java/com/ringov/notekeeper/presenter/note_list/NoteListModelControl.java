@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface NoteListModelControl {
     void sendNoteList(List<NoteEntry> notes);
+    void deletedSuccessfully(boolean success);
 }

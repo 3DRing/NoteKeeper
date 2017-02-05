@@ -44,6 +44,11 @@ public class SQLiteDB implements DBInterface {
         return getInstance(contextProvider).editNote(note);
     }
 
+    @Override
+    public boolean deleteNote(int id, ContextProvider contextProvider) {
+        return getInstance(contextProvider).deleteNote(id);
+    }
+
     private class SQLiteHelper extends SQLiteOpenHelper{
         private static final int VERSION = 1;
         private static final String DB_NAME = "notekeeper.db";
@@ -103,7 +108,7 @@ public class SQLiteDB implements DBInterface {
 
             int result = db.update(TABLE_NAME, updatedValues, "_id="+id, null);
 
-            return result != -1;
+            return result != -1; // false if inserting was failed
         }
 
         public List<NoteEntry> getNoteList(){
@@ -129,6 +134,13 @@ public class SQLiteDB implements DBInterface {
             }
             db.close();
             return notes;
+        }
+
+        public boolean deleteNote(int id) {
+            SQLiteDatabase db = getWritableDatabase();
+            int result = db.delete(TABLE_NAME, "_id = " + id, null);
+            db.close();
+            return result != -1; // false if inserting was failed
         }
     }
 }

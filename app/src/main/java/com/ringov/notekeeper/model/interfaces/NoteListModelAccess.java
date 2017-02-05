@@ -8,4 +8,5 @@ import com.ringov.notekeeper.presenter.ContextProvider;
 
 public interface NoteListModelAccess extends BaseModelAccess {
     void loadNoteList(ContextProvider contextProvider);
+    void deleteNote(int id, ContextProvider contextProvider);
 }

@@ -9,4 +9,5 @@ import com.ringov.notekeeper.presenter.base.BaseControl;
 
 public interface NoteListControl extends BaseControl {
     void loadNoteList(ContextProvider contextProvider);
+    void deleteNote(int id, ContextProvider contextProvider);
 }

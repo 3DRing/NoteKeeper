@@ -44,7 +44,14 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteLi
         holder.llEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                click.handle(crtNote);
+                click.handleClick(crtNote);
+            }
+        });
+        holder.llEntry.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                click.handleLongClick(crtNote);
+                return true;
             }
         });
     }
