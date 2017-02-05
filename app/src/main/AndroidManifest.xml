@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ringov.notekeeper">
 
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +22,14 @@
         </activity>
         <activity android:name=".view.activities.SingleNoteActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <receiver android:name=".SmsReceiver" android:enabled="true">
+            <intent-filter android:priority="100">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".SmsService"/>
     </application>
 
 </manifest>
