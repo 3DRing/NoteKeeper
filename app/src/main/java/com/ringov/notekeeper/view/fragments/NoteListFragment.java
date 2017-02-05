@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ringov.notekeeper.StorageMap;
 import com.ringov.notekeeper.presenter.ContextProvider;
 import com.ringov.notekeeper.presenter.PresenterManager;
 import com.ringov.notekeeper.presenter.note_list.NoteListControl;
+import com.ringov.notekeeper.view.activities.StorageMenuActivity;
 import com.ringov.notekeeper.view.interfaces.EntryClick;
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.view.NoteListAdapter;
@@ -59,10 +61,24 @@ public class NoteListFragment extends BaseFragment implements NoteListView, Cont
 
         adapter = new NoteListAdapter(new EntryClick() {
             @Override
-            public void handle(NoteEntry entry) {
+            public void handleClick(NoteEntry entry) {
                 Intent intent = new Intent(getContext(), SingleNoteActivity.class);
                 intent.putExtra("entry", entry); // todo remove hardcoded text
                 startActivityForResult(intent,1);
+            }
+
+            @Override
+            public void handleLongClick(final NoteEntry entry) {
+                DeleteRecordDialog deleteRecordDialog = new DeleteRecordDialog();
+                Bundle b = new Bundle();
+                b.putSerializable("callback", new DeleteRecordDialog.DeleteCallback(){ //TODO remove hardcoded text
+                    @Override
+                    public void deleteNote() {
+                        noteListControl.deleteNote(entry.getId(), NoteListFragment.this);
+                    }
+                });
+                deleteRecordDialog.setArguments(b);
+                deleteRecordDialog.show(getActivity().getSupportFragmentManager(),"delete_note");  //TODO remove hardcoded text
             }
         });
 

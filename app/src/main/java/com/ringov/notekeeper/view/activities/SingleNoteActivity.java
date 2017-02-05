@@ -62,7 +62,7 @@ public class SingleNoteActivity extends StorageMenuActivity implements SingleNot
 
     private void initializeNoteData(NoteEntry note) {
         if(note == null){
-            //todo unexpected behaviour, handle somehow
+            //todo unexpected behaviour, handleClick somehow
             return;
         }
         this.localEntry = new SingleNoteEntry(note);

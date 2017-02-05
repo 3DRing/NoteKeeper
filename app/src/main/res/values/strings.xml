@@ -97,4 +97,7 @@
         "when a user tries to pick up one of cards.\n\n"</string>
     <string name="text_hint">Text of your note</string>
     <string name="title_hint">Title of your note</string>
+    <string name="ok_delete_button">Delete</string>
+    <string name="delete_note_dialog">Delete note?</string>
+    <string name="cancel_delete_button">Cancel</string>
 </resources>

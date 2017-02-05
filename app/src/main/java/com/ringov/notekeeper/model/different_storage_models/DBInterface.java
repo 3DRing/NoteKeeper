@@ -13,4 +13,5 @@ public interface DBInterface {
     List<NoteEntry> getNoteList(ContextProvider contextProvider);
     boolean addNote(NoteEntry note, ContextProvider contextProvider);
     boolean editNote(NoteEntry note, ContextProvider contextProvider);
+    boolean deleteNote(int id, ContextProvider contextProvider);
 }
