@@ -36,7 +36,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:hint="@string/title_hint"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:textSize="@dimen/title_edit_text_size"/>
 
                 <TextView
                     android:id="@+id/tv_title_single_note"
@@ -73,6 +74,7 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/ic_mode_edit_black_24dp"
+        android:tint="@android:color/white"/>
 
 </android.support.design.widget.CoordinatorLayout>
