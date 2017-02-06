@@ -42,16 +42,16 @@ public class BaseModel
         DBInterface db = null;
         switch (type) {
             case SQLITE_DATABASE:
-                dbInterface = new SQLiteDB();
+                db = new SQLiteDB();
                 break;
             case SDCARD_FILE:
-                dbInterface = new ExternalCardDB();
+                db = new ExternalCardDB();
                 break;
             case SHARED_PREFERENCES:
                 // until implementing
                 //break;
             default:
-                dbInterface = new SQLiteDB();
+                db = new SQLiteDB();
                 break;
         }
         if(db == null){

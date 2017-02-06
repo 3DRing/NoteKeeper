@@ -23,7 +23,8 @@ public class ModelManager {
         if(model != null){
             return model;
         }else{
-            return new BaseModel(contextProvider);
+            model = new BaseModel(contextProvider);
+            return model;
         }
     }
 
