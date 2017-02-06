@@ -177,7 +177,7 @@ public class SingleNoteActivity extends BaseActivity implements SingleNoteView, 
         }
 
         public SingleNoteEntry(NoteEntry note) {
-            super(note.getId(),note.getTitle(),note.getDate());
+            super(note);
             this.setText(note.getText());
         }
 

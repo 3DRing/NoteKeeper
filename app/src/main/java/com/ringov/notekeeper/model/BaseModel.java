@@ -80,7 +80,14 @@ public class BaseModel
     public void commitNote(NoteEntry note, boolean creating, ContextProvider contextProvider) {
         boolean success;
         if (creating) {
-            success = dbInterface.addNote(note, contextProvider);
+            int id = SettingsModel.getNextNoteId(contextProvider);// todo rewrite it in more convenient way
+            NoteEntry withId = new NoteEntry(id, note.getTitle(), note.getDate());
+            withId.setText(note.getText());
+
+            success = dbInterface.addNote(withId, contextProvider);
+            if(success){
+                SettingsModel.setNextNoteId(contextProvider, id + 1);
+            }
             if (singleNoteModelControl != null) {
                 singleNoteModelControl.createdSuccessfully(success);
             }
