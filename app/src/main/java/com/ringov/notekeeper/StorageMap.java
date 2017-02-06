@@ -9,14 +9,14 @@ import android.support.annotation.ArrayRes;
 public class StorageMap {
     public static int getStorageId(STORAGE_TYPE type) {
         int id = 0;
-        switch (type){
-            case SHARED_PREFERENCES:
+        switch (type) {
+            case SQLITE_DATABASE:
                 id = 0;
                 break;
-            case SQLITE_DATABASE:
+            case SDCARD_FILE:
                 id = 1;
                 break;
-            case SDCARD_FILE:
+            case SHARED_PREFERENCES:
                 id = 2;
                 break;
             default:
@@ -33,23 +33,23 @@ public class StorageMap {
     public enum STORAGE_TYPE {SHARED_PREFERENCES, SQLITE_DATABASE, SDCARD_FILE}
 
     @ArrayRes
-    public static int getStorageTypeArrayRes(){
+    public static int getStorageTypeArrayRes() {
         return R.array.storage_list;
     }
 
-    public static STORAGE_TYPE getStorageType(int which){
+    public static STORAGE_TYPE getStorageType(int which) {
         // mapping from R.array.storage_list to enums
 
         STORAGE_TYPE type;
-        switch (which){
+        switch (which) {
             case 0:
-                type = STORAGE_TYPE.SHARED_PREFERENCES;
-                break;
-            case 1:
                 type = STORAGE_TYPE.SQLITE_DATABASE;
                 break;
-            case 2:
+            case 1:
                 type = STORAGE_TYPE.SDCARD_FILE;
+                break;
+            case 2:
+                type = STORAGE_TYPE.SHARED_PREFERENCES;
                 break;
             default:
                 // Save to sqlite db by default

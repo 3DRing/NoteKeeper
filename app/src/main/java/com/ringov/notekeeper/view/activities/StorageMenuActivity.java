@@ -3,10 +3,8 @@ package com.ringov.notekeeper.view.activities;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.ringov.notekeeper.R;
 import com.ringov.notekeeper.StorageMap;
@@ -14,13 +12,12 @@ import com.ringov.notekeeper.presenter.PresenterManager;
 import com.ringov.notekeeper.presenter.settings.SettingsControl;
 import com.ringov.notekeeper.view.fragments.ChangeStorageDialog;
 import com.ringov.notekeeper.view.interfaces.SettingsView;
-import com.ringov.notekeeper.presenter.SharedPreferencesProvider;
 
 /**
  * Created by Сергей on 04.02.2017.
  */
 
-public abstract class StorageMenuActivity extends BaseActivity implements SettingsView, SharedPreferencesProvider {
+public abstract class StorageMenuActivity extends BaseActivity implements SettingsView {
 
     protected SettingsControl settingsControl;
 
@@ -62,10 +59,5 @@ public abstract class StorageMenuActivity extends BaseActivity implements Settin
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public SharedPreferences getSharedPreferences(String name) {
-        return this.getSharedPreferences(name, MODE_PRIVATE);
     }
 }

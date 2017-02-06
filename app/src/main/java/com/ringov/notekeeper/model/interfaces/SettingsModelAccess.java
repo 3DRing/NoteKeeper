@@ -1,13 +1,13 @@
 package com.ringov.notekeeper.model.interfaces;
 
 import com.ringov.notekeeper.StorageMap;
-import com.ringov.notekeeper.presenter.SharedPreferencesProvider;
+import com.ringov.notekeeper.view.interfaces.ContextProvider;
 
 /**
  * Created by Сергей on 04.02.2017.
  */
 
 public interface SettingsModelAccess extends BaseModelAccess {
-    StorageMap.STORAGE_TYPE getCurrentStorageType(SharedPreferencesProvider storageSettingsProvider);
-    void changeCurrentStorageType(StorageMap.STORAGE_TYPE type, SharedPreferencesProvider storageSettingsProvider);
+    StorageMap.STORAGE_TYPE getCurrentStorageType(ContextProvider contextProvider);
+    void changeCurrentStorageType(StorageMap.STORAGE_TYPE type, ContextProvider contextProvider);
 }

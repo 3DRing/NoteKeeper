@@ -1,5 +1,6 @@
 package com.ringov.notekeeper.view.activities;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -13,6 +14,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected abstract void bindViews();
     protected abstract void initializeListeners();
+
+    @Override
+    public Context extractContext() {
+        return this;
+    }
 
     @Override
     public void showMessage(String message) {

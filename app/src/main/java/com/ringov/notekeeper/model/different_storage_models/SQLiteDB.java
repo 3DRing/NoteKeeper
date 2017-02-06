@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.ringov.notekeeper.presenter.ContextProvider;
+import com.ringov.notekeeper.view.interfaces.ContextProvider;
 import com.ringov.notekeeper.presenter.NoteEntry;
 
 import java.util.ArrayList;
@@ -49,6 +49,11 @@ public class SQLiteDB implements DBInterface {
         return getInstance(contextProvider).deleteNote(id);
     }
 
+    @Override
+    public NoteEntry loadNote(int id, ContextProvider contextProvider) {
+        return getInstance(contextProvider).loadNote(id);
+    }
+
     private class SQLiteHelper extends SQLiteOpenHelper{
         private static final int VERSION = 1;
         private static final String DB_NAME = "notekeeper.db";
@@ -80,17 +85,12 @@ public class SQLiteDB implements DBInterface {
             SQLiteDatabase db = getWritableDatabase();
 
             ContentValues insertValues = new ContentValues();
-            int crtId = SettingsModel.getNextNoteId(contextProvider);
-
-            insertValues.put("_id", crtId);
+            insertValues.put("_id", note.getId());
             insertValues.put("title", note.getTitle());
             insertValues.put("date", note.getDate().getTime());
             insertValues.put("text", note.getText());
 
             long result = db.insert(TABLE_NAME, null, insertValues);
-            if(result != -1) {
-                SettingsModel.setNextNoteId(contextProvider, crtId + 1);
-            }
 
             db.close();
             return result != -1; // false if inserting was failed
@@ -111,9 +111,14 @@ public class SQLiteDB implements DBInterface {
             return result != -1; // false if inserting was failed
         }
 
-        public List<NoteEntry> getNoteList(){
+        private List<NoteEntry> getEntries(String clause){
             SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor = db.rawQuery("select * from " + TABLE_NAME,null);
+            Cursor cursor;
+            if(clause == null || clause.equals("")){
+                cursor = db.rawQuery("select * from " + TABLE_NAME,null);
+            }else{
+                cursor = db.rawQuery("select * from " + TABLE_NAME + " WHERE " + clause,null);
+            }
 
             List<NoteEntry> notes = new ArrayList<>();
             if(cursor.moveToFirst()) {
@@ -136,11 +141,30 @@ public class SQLiteDB implements DBInterface {
             return notes;
         }
 
+        public List<NoteEntry> getNoteList(){
+            return getEntries("");
+        }
+
         public boolean deleteNote(int id) {
             SQLiteDatabase db = getWritableDatabase();
             int result = db.delete(TABLE_NAME, "_id = " + id, null);
             db.close();
             return result != -1; // false if inserting was failed
+        }
+
+        public NoteEntry loadNote(int id) {
+            List<NoteEntry> notes = getEntries("_id = " + id);
+            if(notes.size() == 0){
+                // note with such id not found - unexpected behaviour
+                return NoteEntry.EMPTY_NOTE;
+            }
+            if(notes.size() != 1){
+                // impossible case, but anyway, let's return [0] record
+                return notes.get(0);
+            }else{
+                // normal behaviour
+                return notes.get(0);
+            }
         }
     }
 }

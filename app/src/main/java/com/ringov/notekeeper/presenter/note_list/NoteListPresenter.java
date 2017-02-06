@@ -2,13 +2,11 @@ package com.ringov.notekeeper.presenter.note_list;
 
 import com.ringov.notekeeper.model.ModelManager;
 import com.ringov.notekeeper.model.interfaces.NoteListModelAccess;
-import com.ringov.notekeeper.presenter.ContextProvider;
+import com.ringov.notekeeper.view.interfaces.ContextProvider;
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.presenter.base.BasePresenter;
 import com.ringov.notekeeper.view.interfaces.NoteListView;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,7 +16,7 @@ public class NoteListPresenter extends BasePresenter<NoteListView, NoteListModel
         implements NoteListControl, NoteListModelControl{
     public NoteListPresenter(NoteListView view) {
         super(view);
-        model = ModelManager.getNoteListModel(this);
+        model = ModelManager.getNoteListModel(this, view);
     }
 
     @Override

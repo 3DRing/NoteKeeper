@@ -1,6 +1,6 @@
 package com.ringov.notekeeper.model.interfaces;
 
-import com.ringov.notekeeper.presenter.ContextProvider;
+import com.ringov.notekeeper.view.interfaces.ContextProvider;
 
 /**
  * Created by Сергей on 04.02.2017.

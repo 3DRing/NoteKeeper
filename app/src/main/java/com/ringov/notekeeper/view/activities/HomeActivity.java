@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.ringov.notekeeper.R;
-import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.view.fragments.NoteListFragment;
 import com.ringov.notekeeper.view.interfaces.NoteListView;
 
@@ -71,5 +70,10 @@ public class HomeActivity extends StorageMenuActivity {
         if(resultCode == RESULT_OK) {
             noteListView.update();
         }
+    }
+
+    @Override
+    public void onStorageTypeChangedUpdate() {
+        noteListView.update();
     }
 }

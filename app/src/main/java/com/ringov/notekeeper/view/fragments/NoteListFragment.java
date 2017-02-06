@@ -1,20 +1,17 @@
 package com.ringov.notekeeper.view.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ringov.notekeeper.StorageMap;
-import com.ringov.notekeeper.presenter.ContextProvider;
 import com.ringov.notekeeper.presenter.PresenterManager;
 import com.ringov.notekeeper.presenter.note_list.NoteListControl;
-import com.ringov.notekeeper.view.activities.StorageMenuActivity;
 import com.ringov.notekeeper.view.interfaces.EntryClick;
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.view.NoteListAdapter;
@@ -29,10 +26,9 @@ import java.util.List;
  * Created by Сергей on 04.02.2017.
  */
 
-public class NoteListFragment extends BaseFragment implements NoteListView, ContextProvider{
+public class NoteListFragment extends BaseFragment implements NoteListView{
 
-    public static String TAG = "NoteListFragment";
-
+    private SwipeRefreshLayout updateLayout;
     private RecyclerView rv;
     private NoteListAdapter adapter;
     private List<NoteEntry> tmpList;
@@ -45,14 +41,33 @@ public class NoteListFragment extends BaseFragment implements NoteListView, Cont
         View view = inflater.inflate(R.layout.note_list_fragment,container, false);
 
         noteListControl = PresenterManager.getNoteListControl(this);
-        initializeRecyclerView(view);
+
+        // order matters
+        bindViews(view);
+        initializeListeners();
+
         initializeData();
 
         return view;
     }
 
+    private void initializeListeners() {
+        updateLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                update();
+                updateLayout.setRefreshing(false);
+            }
+        });
+    }
+
     private void initializeData() {
         noteListControl.loadNoteList(this);
+    }
+
+    private void bindViews(View view){
+        initializeRecyclerView(view);
+        updateLayout = (SwipeRefreshLayout) view.findViewById(R.id.update_layout);
     }
 
     private void initializeRecyclerView(View view){
@@ -63,7 +78,7 @@ public class NoteListFragment extends BaseFragment implements NoteListView, Cont
             @Override
             public void handleClick(NoteEntry entry) {
                 Intent intent = new Intent(getContext(), SingleNoteActivity.class);
-                intent.putExtra("entry", entry); // todo remove hardcoded text
+                intent.putExtra("id", entry.getId());
                 startActivityForResult(intent,1);
             }
 
@@ -121,10 +136,5 @@ public class NoteListFragment extends BaseFragment implements NoteListView, Cont
     @Override
     public void setBaseView(BaseView baseViewProvider) {
         this.baseViewProvider = baseViewProvider;
-    }
-
-    @Override
-    public Context extractContext() {
-        return getContext();
     }
 }

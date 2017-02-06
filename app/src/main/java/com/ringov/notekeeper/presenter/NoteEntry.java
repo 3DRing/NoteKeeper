@@ -1,7 +1,5 @@
 package com.ringov.notekeeper.presenter;
 
-import com.ringov.notekeeper.view.activities.SingleNoteActivity;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,6 +9,7 @@ import java.util.Date;
  */
 public class NoteEntry implements Serializable{
 
+    public static final NoteEntry EMPTY_NOTE = new NoteEntry(-1, "", new Date()); // -1 means this entry should be created
     private int id;
     protected String title;
     protected Date date;
@@ -23,6 +22,13 @@ public class NoteEntry implements Serializable{
         this.title = title;
         this.date = date;
         this.text = "";
+    }
+
+    public NoteEntry(NoteEntry note) {
+        this.id = note.getId();
+        this.title = note.getTitle();
+        this.date = note.getDate();
+        this.text = note.getText();
     }
 
     public int getId(){

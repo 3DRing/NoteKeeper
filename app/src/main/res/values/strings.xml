@@ -3,9 +3,9 @@
     <string name="change_storage">Change Storage</string>
 
     <array name="storage_list">
-        <item>SharedPreferences</item>
         <item>SQLite Database</item>
         <item>SDCard File</item>
+        <!--<item>SharedPreferences</item>-->
     </array>
 
     <string name="large_note_text">"Material is the metaphor.\n\n"
