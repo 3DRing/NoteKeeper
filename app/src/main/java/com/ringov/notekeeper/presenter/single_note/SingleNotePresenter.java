@@ -25,6 +25,13 @@ public class SingleNotePresenter extends BasePresenter<SingleNoteView, SingleNot
 
     @Override
     public void commitNote(NoteEntry entry, boolean creating, ContextProvider contextProvider) {
+        if(creating){
+            if(entry.getTitle() == null || entry.getTitle().equals("")){
+                view.showMessage("You have to fill in the title"); // todo remove hardcoded text
+                return;
+            }
+        }
+        view.showLoading("");
         model.commitNote(entry, creating, contextProvider);
     }
 
