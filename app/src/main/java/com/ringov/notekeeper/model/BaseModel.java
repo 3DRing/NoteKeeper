@@ -2,6 +2,7 @@ package com.ringov.notekeeper.model;
 
 import com.ringov.notekeeper.StorageMap;
 import com.ringov.notekeeper.model.different_storage_models.DBInterface;
+import com.ringov.notekeeper.model.different_storage_models.ExternalCardDB;
 import com.ringov.notekeeper.model.different_storage_models.SQLiteDB;
 import com.ringov.notekeeper.model.different_storage_models.SettingsModel;
 import com.ringov.notekeeper.model.interfaces.NoteListModelAccess;
@@ -34,7 +35,7 @@ public class BaseModel
     private DBInterface dbInterface;
 
     public BaseModel() {
-        dbInterface = new SQLiteDB();
+        dbInterface = new ExternalCardDB();
     }
 
     public void setSettingsModelControl(SettingsModelControl control) {
