@@ -22,8 +22,10 @@
             android:id="@+id/et_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="top|left"
             android:background="@android:color/transparent"
             android:ems="10"
+            android:lines="20"
             android:hint="@string/text_hint"
             android:inputType="textMultiLine"
             android:textCursorDrawable="@null"/>
