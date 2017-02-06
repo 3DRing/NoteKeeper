@@ -6,7 +6,6 @@ import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvid
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -54,6 +53,12 @@ public class ExternalCardDB implements DBInterface {
         return false;
     }
 
+    /**
+     * like DROP DATABASE
+     *
+     * @param fileName
+     * @return
+     */
     private boolean deleteFile(String fileName){
         String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + ALL_DATA_PATH + APPLICATION_PATH;
         final File file = new File(dir, fileName + DB_FILE_EXTENTION);
@@ -80,6 +85,21 @@ public class ExternalCardDB implements DBInterface {
             return null;
         }
         return data;
+    }
+
+    private boolean writeNoteListToFile(List<NoteEntry> list){
+        String rawList;
+        JSONArray rawJson = null;
+        try {
+            rawJson = JSONConverter.fromNoteList(list);
+        } catch (JSONException e) {
+            // todo deal with error
+            return false;
+        }
+        rawList = JSONConverter.toString(rawJson);
+
+        boolean result = writeToFile(DB_FILE_NAME, rawList);
+        return result;
     }
 
     // todo return meaningful values instead of "false" to understand what is the problem
@@ -150,33 +170,66 @@ public class ExternalCardDB implements DBInterface {
         List<NoteEntry> list = getLocalNotesList();
         list.add(note);
 
-        String rawList;
-        JSONArray rawJson = null;
-        try {
-            rawJson = JSONConverter.fromNoteList(list);
-        } catch (JSONException e) {
-            // todo deal with error
-            return false;
-        }
-        rawList = JSONConverter.toString(rawJson);
-
-        boolean result = writeToFile(DB_FILE_NAME, rawList);
-        return result;
+        // todo use "append" without rewriting the whole file (?)
+        // (then should deal somehow with not matching with JSONArray format)
+        return writeNoteListToFile(list);
     }
 
     @Override
     public boolean editNote(NoteEntry note, ContextProvider contextProvider) {
-        return false;
+        List<NoteEntry> list = getNoteListLocallyOrFromFile(contextProvider);
+
+        int index = searchingForNoteById(list, note.getId());
+        if(index != -1){
+            list.set(index, note);
+        }
+
+        return writeNoteListToFile(list);
     }
 
     @Override
     public boolean deleteNote(int id, ContextProvider contextProvider) {
-        return false;
+        List<NoteEntry> list = getNoteListLocallyOrFromFile(contextProvider);
+
+        int index = searchingForNoteById(list, id);
+        if(index != -1) {
+            list.remove(index);
+            return writeNoteListToFile(list);
+        }else{
+            return false;
+        }
     }
 
     @Override
     public NoteEntry loadNote(int id, ContextProvider contextProvider) {
+        List<NoteEntry> list = getNoteListLocallyOrFromFile(contextProvider);
 
-        return NoteEntry.EMPTY_NOTE;
+        int index = searchingForNoteById(list, id);
+        if(index == -1){
+            // unexpected behaviour
+            return NoteEntry.EMPTY_NOTE;
+        }else{
+            return  list.get(index);
+        }
+    }
+
+    private List<NoteEntry> getNoteListLocallyOrFromFile(ContextProvider contextProvider){
+        if(localNotesList == null) {
+            localNotesList = getNoteList(contextProvider);
+        }
+        List<NoteEntry> list = getLocalNotesList();
+        return list;
+    }
+
+    private int searchingForNoteById(List<NoteEntry> list, int id){
+        int index = -1;
+        //todo use more efficient approach
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getId() == id){
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 }

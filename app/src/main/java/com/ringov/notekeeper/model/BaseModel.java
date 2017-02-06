@@ -3,7 +3,6 @@ package com.ringov.notekeeper.model;
 import com.ringov.notekeeper.StorageMap;
 import com.ringov.notekeeper.model.different_storage_models.DBInterface;
 import com.ringov.notekeeper.model.different_storage_models.ExternalCardDB;
-import com.ringov.notekeeper.model.different_storage_models.SQLiteDB;
 import com.ringov.notekeeper.model.different_storage_models.SettingsModel;
 import com.ringov.notekeeper.model.interfaces.NoteListModelAccess;
 import com.ringov.notekeeper.model.interfaces.SettingsModelAccess;
