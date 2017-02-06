@@ -1,14 +1,10 @@
-package com.ringov.notekeeper;
+package com.ringov.notekeeper.presenter.sms_handling;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.ringov.notekeeper.presenter.NoteEntry;
 
 import java.io.Serializable;
 import java.util.Date;

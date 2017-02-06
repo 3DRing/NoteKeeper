@@ -1,4 +1,4 @@
-package com.ringov.notekeeper;
+package com.ringov.notekeeper.presenter.sms_handling;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.ringov.notekeeper.R;
 import com.ringov.notekeeper.view.activities.HomeActivity;
 
 /**
@@ -24,9 +25,9 @@ public class SmsService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        SmsReceiver.SMS sms = (SmsReceiver.SMS)intent.getSerializableExtra("sms");
+        SmsReceiver.SMS sms = (SmsReceiver.SMS)intent.getSerializableExtra("sms"); // todo remove hardcoded text
 
-
+        // todo save sms
 
         showNotification(sms);
         return START_STICKY;

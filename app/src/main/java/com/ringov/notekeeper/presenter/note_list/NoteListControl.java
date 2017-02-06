@@ -1,6 +1,6 @@
 package com.ringov.notekeeper.presenter.note_list;
 
-import com.ringov.notekeeper.presenter.ContextProvider;
+import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
 import com.ringov.notekeeper.presenter.base.BaseControl;
 
 /**

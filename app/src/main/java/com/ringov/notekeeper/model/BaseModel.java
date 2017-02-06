@@ -7,11 +7,11 @@ import com.ringov.notekeeper.model.different_storage_models.SettingsModel;
 import com.ringov.notekeeper.model.interfaces.NoteListModelAccess;
 import com.ringov.notekeeper.model.interfaces.SettingsModelAccess;
 import com.ringov.notekeeper.model.interfaces.SingleNoteModelAccess;
-import com.ringov.notekeeper.presenter.ContextProvider;
+import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.presenter.note_list.NoteListModelControl;
 import com.ringov.notekeeper.presenter.settings.SettingsModelControl;
-import com.ringov.notekeeper.presenter.SharedPreferencesProvider;
+import com.ringov.notekeeper.presenter.android_relations_providers.SharedPreferencesProvider;
 import com.ringov.notekeeper.presenter.single_note.SingleNoteModelControl;
 
 import java.util.List;

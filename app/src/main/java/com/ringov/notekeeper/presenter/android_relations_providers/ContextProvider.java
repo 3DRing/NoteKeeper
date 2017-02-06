@@ -1,4 +1,4 @@
-package com.ringov.notekeeper.presenter;
+package com.ringov.notekeeper.presenter.android_relations_providers;
 
 import android.content.Context;
 

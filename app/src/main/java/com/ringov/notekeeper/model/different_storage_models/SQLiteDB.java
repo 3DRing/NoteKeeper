@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.ringov.notekeeper.presenter.ContextProvider;
+import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
 import com.ringov.notekeeper.presenter.NoteEntry;
 
 import java.util.ArrayList;

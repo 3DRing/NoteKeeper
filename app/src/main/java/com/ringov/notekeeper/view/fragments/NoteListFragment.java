@@ -10,11 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ringov.notekeeper.StorageMap;
-import com.ringov.notekeeper.presenter.ContextProvider;
+import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
 import com.ringov.notekeeper.presenter.PresenterManager;
 import com.ringov.notekeeper.presenter.note_list.NoteListControl;
-import com.ringov.notekeeper.view.activities.StorageMenuActivity;
 import com.ringov.notekeeper.view.interfaces.EntryClick;
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.view.NoteListAdapter;

@@ -2,7 +2,7 @@ package com.ringov.notekeeper.presenter.single_note;
 
 import com.ringov.notekeeper.model.ModelManager;
 import com.ringov.notekeeper.model.interfaces.SingleNoteModelAccess;
-import com.ringov.notekeeper.presenter.ContextProvider;
+import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.presenter.base.BasePresenter;
 import com.ringov.notekeeper.view.interfaces.SingleNoteView;

@@ -1,6 +1,6 @@
 package com.ringov.notekeeper.model.interfaces;
 
-import com.ringov.notekeeper.presenter.ContextProvider;
+import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
 import com.ringov.notekeeper.presenter.NoteEntry;
 
 /**

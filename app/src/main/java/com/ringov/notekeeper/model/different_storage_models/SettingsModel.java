@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.ringov.notekeeper.StorageMap;
-import com.ringov.notekeeper.presenter.ContextProvider;
-import com.ringov.notekeeper.presenter.SharedPreferencesProvider;
+import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
+import com.ringov.notekeeper.presenter.android_relations_providers.SharedPreferencesProvider;
 
 /**
  * Created by Сергей on 04.02.2017.

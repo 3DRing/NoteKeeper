@@ -2,13 +2,11 @@ package com.ringov.notekeeper.presenter.note_list;
 
 import com.ringov.notekeeper.model.ModelManager;
 import com.ringov.notekeeper.model.interfaces.NoteListModelAccess;
-import com.ringov.notekeeper.presenter.ContextProvider;
+import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.presenter.base.BasePresenter;
 import com.ringov.notekeeper.view.interfaces.NoteListView;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
