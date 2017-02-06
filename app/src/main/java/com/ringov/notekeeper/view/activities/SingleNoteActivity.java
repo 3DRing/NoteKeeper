@@ -102,7 +102,6 @@ public class SingleNoteActivity extends BaseActivity implements SingleNoteView, 
 
     private void updateLocalEntry(){
         localEntry.setTitle(this.etTitle.getText().toString());
-        localEntry.setDate(new Date());
         localEntry.setText(this.etText.getText().toString());
     }
 
