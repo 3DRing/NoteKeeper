@@ -86,17 +86,12 @@ public class SQLiteDB implements DBInterface {
             SQLiteDatabase db = getWritableDatabase();
 
             ContentValues insertValues = new ContentValues();
-            int crtId = SettingsModel.getNextNoteId(contextProvider);
-
-            insertValues.put("_id", crtId);
+            insertValues.put("_id", note.getId());
             insertValues.put("title", note.getTitle());
             insertValues.put("date", note.getDate().getTime());
             insertValues.put("text", note.getText());
 
             long result = db.insert(TABLE_NAME, null, insertValues);
-            if(result != -1) {
-                SettingsModel.setNextNoteId(contextProvider, crtId + 1);
-            }
 
             db.close();
             return result != -1; // false if inserting was failed

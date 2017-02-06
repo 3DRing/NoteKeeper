@@ -24,6 +24,13 @@ public class NoteEntry implements Serializable{
         this.text = "";
     }
 
+    public NoteEntry(NoteEntry note) {
+        this.id = note.getId();
+        this.title = note.getTitle();
+        this.date = note.getDate();
+        this.text = note.getText();
+    }
+
     public int getId(){
         return id;
     }
