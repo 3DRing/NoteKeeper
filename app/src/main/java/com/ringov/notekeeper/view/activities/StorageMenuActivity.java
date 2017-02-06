@@ -20,10 +20,7 @@ import com.ringov.notekeeper.presenter.SharedPreferencesProvider;
  * Created by Сергей on 04.02.2017.
  */
 
-public abstract class StorageMenuActivity extends AppCompatActivity implements SettingsView, SharedPreferencesProvider {
-
-    protected abstract void bindViews();
-    protected abstract void initializeListeners();
+public abstract class StorageMenuActivity extends BaseActivity implements SettingsView, SharedPreferencesProvider {
 
     protected SettingsControl settingsControl;
 
@@ -65,21 +62,6 @@ public abstract class StorageMenuActivity extends AppCompatActivity implements S
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showLoading(String message) {
-        // todo implement
-    }
-
-    @Override
-    public void stopLoading() {
-        // todo implement
     }
 
     @Override

@@ -19,7 +19,7 @@ import com.ringov.notekeeper.view.interfaces.SingleNoteView;
 
 import java.util.Date;
 
-public class SingleNoteActivity extends StorageMenuActivity implements SingleNoteView, ContextProvider{
+public class SingleNoteActivity extends BaseActivity implements SingleNoteView, ContextProvider{
 
     private NoteEntry entry;
     private SingleNoteEntry localEntry;
@@ -126,6 +126,7 @@ public class SingleNoteActivity extends StorageMenuActivity implements SingleNot
             // Content field
             tvText.setVisibility(View.GONE);
             etText.setVisibility(View.VISIBLE);
+            fab.setImageResource(R.drawable.ic_done_black_24dp);
         } else {
             // Toolbar
             tvTitle.setVisibility(View.VISIBLE);
@@ -135,6 +136,7 @@ public class SingleNoteActivity extends StorageMenuActivity implements SingleNot
             // Content field
             tvText.setVisibility(View.VISIBLE);
             etText.setVisibility(View.GONE);
+            fab.setImageResource(R.drawable.ic_mode_edit_black_24dp);
         }
     }
 
