@@ -13,9 +13,8 @@ import com.ringov.notekeeper.R;
 import com.ringov.notekeeper.model.ModelManager;
 import com.ringov.notekeeper.model.interfaces.SingleNoteModelAccess;
 import com.ringov.notekeeper.presenter.NoteEntry;
-import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
+import com.ringov.notekeeper.view.interfaces.ContextProvider;
 import com.ringov.notekeeper.presenter.single_note.SingleNoteControl;
-import com.ringov.notekeeper.presenter.single_note.SingleNoteModelControl;
 import com.ringov.notekeeper.view.activities.HomeActivity;
 
 /**
@@ -72,7 +71,7 @@ public class SmsService extends Service implements SingleNoteControl{
 
     @Override
     public void commitNote(NoteEntry entry, boolean creating, ContextProvider contextProvider) {
-        SingleNoteModelAccess model = ModelManager.getSingleNoteModel(null);
+        SingleNoteModelAccess model = ModelManager.getSingleNoteModel(null, contextProvider);
         model.commitNote(entry,creating,contextProvider);
     }
 }

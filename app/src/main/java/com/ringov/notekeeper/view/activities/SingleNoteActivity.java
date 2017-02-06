@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
+import com.ringov.notekeeper.view.interfaces.ContextProvider;
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.R;
 import com.ringov.notekeeper.presenter.PresenterManager;

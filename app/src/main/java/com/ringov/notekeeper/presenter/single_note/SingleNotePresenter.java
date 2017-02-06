@@ -2,7 +2,7 @@ package com.ringov.notekeeper.presenter.single_note;
 
 import com.ringov.notekeeper.model.ModelManager;
 import com.ringov.notekeeper.model.interfaces.SingleNoteModelAccess;
-import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
+import com.ringov.notekeeper.view.interfaces.ContextProvider;
 import com.ringov.notekeeper.presenter.NoteEntry;
 import com.ringov.notekeeper.presenter.base.BasePresenter;
 import com.ringov.notekeeper.view.interfaces.SingleNoteView;
@@ -14,7 +14,7 @@ public class SingleNotePresenter extends BasePresenter<SingleNoteView, SingleNot
         implements SingleNoteControl, SingleNoteModelControl{
     public SingleNotePresenter(SingleNoteView view) {
         super(view);
-        model = ModelManager.getSingleNoteModel(this);
+        model = ModelManager.getSingleNoteModel(this, view);
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.ringov.notekeeper.view.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
 import com.ringov.notekeeper.presenter.PresenterManager;
 import com.ringov.notekeeper.presenter.note_list.NoteListControl;
 import com.ringov.notekeeper.view.interfaces.EntryClick;
@@ -29,9 +26,7 @@ import java.util.List;
  * Created by Сергей on 04.02.2017.
  */
 
-public class NoteListFragment extends BaseFragment implements NoteListView, ContextProvider{
-
-    public static String TAG = "NoteListFragment";
+public class NoteListFragment extends BaseFragment implements NoteListView{
 
     private SwipeRefreshLayout updateLayout;
     private RecyclerView rv;
@@ -141,10 +136,5 @@ public class NoteListFragment extends BaseFragment implements NoteListView, Cont
     @Override
     public void setBaseView(BaseView baseViewProvider) {
         this.baseViewProvider = baseViewProvider;
-    }
-
-    @Override
-    public Context extractContext() {
-        return getContext();
     }
 }

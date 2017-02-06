@@ -5,4 +5,5 @@ package com.ringov.notekeeper.view.interfaces;
  */
 
 public interface SettingsView extends BaseView {
+    void onStorageTypeChangedUpdate();
 }

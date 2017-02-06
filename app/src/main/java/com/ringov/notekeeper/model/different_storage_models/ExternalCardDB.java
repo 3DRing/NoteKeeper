@@ -2,7 +2,7 @@ package com.ringov.notekeeper.model.different_storage_models;
 
 import android.os.Environment;
 import com.ringov.notekeeper.presenter.NoteEntry;
-import com.ringov.notekeeper.presenter.android_relations_providers.ContextProvider;
+import com.ringov.notekeeper.view.interfaces.ContextProvider;
 
 import org.json.JSONArray;
 import org.json.JSONException;
