@@ -25,13 +25,6 @@ public class SingleNotePresenter extends BasePresenter<SingleNoteView, SingleNot
 
     @Override
     public void commitNote(NoteEntry entry, boolean creating, ContextProvider contextProvider) {
-        if(creating){
-            if(entry.getTitle() == null || entry.getTitle().equals("")){
-                view.showMessage("You have to fill in the title");
-                return;
-            }
-        }
-        view.showLoading("");
         model.commitNote(entry, creating, contextProvider);
     }
 
@@ -56,7 +49,6 @@ public class SingleNotePresenter extends BasePresenter<SingleNoteView, SingleNot
     }
 
     private void showSuccess(boolean success){
-        view.stopLoading();
         if(success){
             view.successCommit();
         }else{
