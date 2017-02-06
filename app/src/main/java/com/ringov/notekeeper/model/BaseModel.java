@@ -72,10 +72,14 @@ public class BaseModel
         boolean success;
         if(creating) {
             success = dbInterface.addNote(note, contextProvider);
-            singleNoteModelControl.createdSuccessfully(success);
+            if(singleNoteModelControl != null) {
+                singleNoteModelControl.createdSuccessfully(success);
+            }
         }else {
             success = dbInterface.editNote(note, contextProvider);
-            singleNoteModelControl.editedSuccessfully(success);
+            if(singleNoteModelControl != null) {
+                singleNoteModelControl.editedSuccessfully(success);
+            }
         }
 
     }

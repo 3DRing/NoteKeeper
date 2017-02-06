@@ -1,5 +1,7 @@
 package com.ringov.notekeeper.model;
 
+import android.support.annotation.Nullable;
+
 import com.ringov.notekeeper.model.interfaces.NoteListModelAccess;
 import com.ringov.notekeeper.model.interfaces.SettingsModelAccess;
 import com.ringov.notekeeper.model.interfaces.SingleNoteModelAccess;
@@ -37,7 +39,7 @@ public class ModelManager {
         return model;
     }
 
-    public static SingleNoteModelAccess getSingleNoteModel(SingleNoteModelControl control) {
+    public static SingleNoteModelAccess getSingleNoteModel(@Nullable SingleNoteModelControl control) {
         BaseModel model = getInstance();
         model.setSingleNoteModelControl(control);
         return model;

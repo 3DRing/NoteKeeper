@@ -1,4 +1,4 @@
-package com.ringov.notekeeper.presenter.sms_handling;
+package com.ringov.notekeeper.presenter.single_note.sms_handling;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -58,10 +58,6 @@ public class SmsReceiver extends BroadcastReceiver {
 
             String sender = messages[0].getOriginatingAddress();
             Date date = new Date();
-
-            String adr = messages[0].getOriginatingAddress();
-            String pseudo = messages[0].getPseudoSubject();
-
             SMS sms = new SMS(sender, date, text);
 
             Intent toServiceIntent = new Intent(context, SmsService.class);

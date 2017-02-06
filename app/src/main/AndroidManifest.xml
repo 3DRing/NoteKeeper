@@ -23,13 +23,15 @@
         <activity android:name=".view.activities.SingleNoteActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <receiver android:name=".presenter.sms_handling.SmsReceiver" android:enabled="true">
+        <receiver android:name=".presenter.single_note.sms_handling.SmsReceiver"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter android:priority="100">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
         </receiver>
 
-        <service android:name=".presenter.sms_handling.SmsService"/>
+        <service android:name=".presenter.single_note.sms_handling.SmsService"/>
     </application>
 
 </manifest>
