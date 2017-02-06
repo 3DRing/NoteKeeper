@@ -19,7 +19,7 @@ import com.ringov.notekeeper.view.interfaces.SingleNoteView;
 
 import java.util.Date;
 
-public class SingleNoteActivity extends StorageMenuActivity implements SingleNoteView, ContextProvider{
+public class SingleNoteActivity extends BaseActivity implements SingleNoteView, ContextProvider{
 
     private NoteEntry entry;
     private SingleNoteEntry localEntry;
