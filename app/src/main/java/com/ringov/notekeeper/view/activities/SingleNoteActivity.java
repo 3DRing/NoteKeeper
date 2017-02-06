@@ -21,7 +21,6 @@ import java.util.Date;
 
 public class SingleNoteActivity extends BaseActivity implements SingleNoteView, ContextProvider{
 
-    private NoteEntry entry;
     private SingleNoteEntry localEntry;
     private boolean editMode;
 
@@ -49,24 +48,16 @@ public class SingleNoteActivity extends BaseActivity implements SingleNoteView, 
 
         Intent intent = getIntent();
         editMode = intent.getBooleanExtra("edit_mode", false); //todo remove hardcoded text
-        entry = (NoteEntry) intent.getSerializableExtra("entry"); // todo remove hardcoded text
+
+        int id = intent.getIntExtra("id",-1);
 
         if(!editMode) {
-            initializeNoteData(entry);
+            singleNoteControl.loadNote(id, this);
         }else{
             creating = true;
-            localEntry = SingleNoteEntry.emptyNoteEntry();
+            localEntry = SingleNoteEntry.EMPTY_NOTE;
         }
         changeMode(editMode);
-    }
-
-    private void initializeNoteData(NoteEntry note) {
-        if(note == null){
-            //todo unexpected behaviour, handleClick somehow
-            return;
-        }
-        this.localEntry = new SingleNoteEntry(note);
-        showNote(localEntry);
     }
 
     @Override
@@ -142,6 +133,7 @@ public class SingleNoteActivity extends BaseActivity implements SingleNoteView, 
 
     @Override
     public void showNote(NoteEntry note) {
+        this.localEntry = new SingleNoteEntry(note);
         tvTitle.setText(note.getTitle());
         tvDate.setText(note.getFormattedDate());
         tvText.setText(note.getText());
@@ -178,6 +170,8 @@ public class SingleNoteActivity extends BaseActivity implements SingleNoteView, 
 
     private static class SingleNoteEntry extends NoteEntry{
 
+        public static final SingleNoteEntry EMPTY_NOTE = new SingleNoteEntry(NoteEntry.EMPTY_NOTE);
+
         public SingleNoteEntry(int id, String title, Date date) {
             super(id, title, date);
         }
@@ -193,10 +187,6 @@ public class SingleNoteActivity extends BaseActivity implements SingleNoteView, 
 
         public void setDate(Date date) {
             this.date = date;
-        }
-
-        public static SingleNoteActivity.SingleNoteEntry emptyNoteEntry() {
-            return new SingleNoteEntry(-1, "", new Date()); // -1 means this entry should be created
         }
     }
 }

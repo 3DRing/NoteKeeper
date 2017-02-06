@@ -14,4 +14,5 @@ public interface DBInterface {
     boolean addNote(NoteEntry note, ContextProvider contextProvider);
     boolean editNote(NoteEntry note, ContextProvider contextProvider);
     boolean deleteNote(int id, ContextProvider contextProvider);
+    NoteEntry loadNote(int id, ContextProvider contextProvider);
 }

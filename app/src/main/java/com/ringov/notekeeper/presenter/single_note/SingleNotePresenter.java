@@ -18,6 +18,12 @@ public class SingleNotePresenter extends BasePresenter<SingleNoteView, SingleNot
     }
 
     @Override
+    public void loadNote(int id, ContextProvider contextProvider) {
+        view.showLoading("");
+        model.loadNote(id, contextProvider);
+    }
+
+    @Override
     public void commitNote(NoteEntry entry, boolean creating, ContextProvider contextProvider) {
         model.commitNote(entry, creating, contextProvider);
     }
@@ -30,6 +36,16 @@ public class SingleNotePresenter extends BasePresenter<SingleNoteView, SingleNot
     @Override
     public void editedSuccessfully(boolean success) {
         showSuccess(success);
+    }
+
+    @Override
+    public void showNote(NoteEntry note) {
+        view.stopLoading();
+        if(!note.equals(NoteEntry.EMPTY_NOTE)){
+            view.showNote(note);
+        }else{
+            view.showMessage("Note not found");
+        }
     }
 
     private void showSuccess(boolean success){

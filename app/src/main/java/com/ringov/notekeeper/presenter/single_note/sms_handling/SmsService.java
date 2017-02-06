@@ -65,6 +65,12 @@ public class SmsService extends Service implements SingleNoteControl{
     }
 
     @Override
+    public void loadNote(int id, ContextProvider contextProvider) {
+        // not used
+        // todo - separate interfaces to avoid this method appear here
+    }
+
+    @Override
     public void commitNote(NoteEntry entry, boolean creating, ContextProvider contextProvider) {
         SingleNoteModelAccess model = ModelManager.getSingleNoteModel(null);
         model.commitNote(entry,creating,contextProvider);

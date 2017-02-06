@@ -61,7 +61,7 @@ public class NoteListFragment extends BaseFragment implements NoteListView, Cont
             @Override
             public void handleClick(NoteEntry entry) {
                 Intent intent = new Intent(getContext(), SingleNoteActivity.class);
-                intent.putExtra("entry", entry); // todo remove hardcoded text
+                intent.putExtra("id", entry.getId());
                 startActivityForResult(intent,1);
             }
 

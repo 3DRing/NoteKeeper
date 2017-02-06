@@ -9,5 +9,6 @@ import com.ringov.notekeeper.presenter.base.BaseControl;
  */
 
 public interface SingleNoteControl extends BaseControl {
+    void loadNote(int id, ContextProvider contextProvider);
     void commitNote(NoteEntry entry, boolean creating, ContextProvider contextProvider);
 }

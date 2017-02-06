@@ -24,7 +24,7 @@ public class BaseModel
         implements
         SettingsModelAccess,
         NoteListModelAccess,
-        SingleNoteModelAccess{
+        SingleNoteModelAccess {
 
     // presenter controllers
     private SettingsModelControl settingsModelControl;
@@ -33,7 +33,7 @@ public class BaseModel
 
     private DBInterface dbInterface;
 
-    public BaseModel(){
+    public BaseModel() {
         dbInterface = new SQLiteDB();
     }
 
@@ -48,7 +48,7 @@ public class BaseModel
 
     @Override
     public void changeCurrentStorageType(StorageMap.STORAGE_TYPE type, SharedPreferencesProvider storageSettingsProvider) {
-        SettingsModel.updateStorageType(type,storageSettingsProvider);
+        SettingsModel.updateStorageType(type, storageSettingsProvider);
     }
 
     @Override
@@ -68,16 +68,24 @@ public class BaseModel
     }
 
     @Override
+    public void loadNote(int id, ContextProvider contextProvider) {
+        NoteEntry note = dbInterface.loadNote(id, contextProvider);
+        if (singleNoteModelControl != null) {
+            singleNoteModelControl.showNote(note);
+        }
+    }
+
+    @Override
     public void commitNote(NoteEntry note, boolean creating, ContextProvider contextProvider) {
         boolean success;
-        if(creating) {
+        if (creating) {
             success = dbInterface.addNote(note, contextProvider);
-            if(singleNoteModelControl != null) {
+            if (singleNoteModelControl != null) {
                 singleNoteModelControl.createdSuccessfully(success);
             }
-        }else {
+        } else {
             success = dbInterface.editNote(note, contextProvider);
-            if(singleNoteModelControl != null) {
+            if (singleNoteModelControl != null) {
                 singleNoteModelControl.editedSuccessfully(success);
             }
         }
