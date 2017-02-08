@@ -100,4 +100,6 @@
     <string name="ok_delete_button">Delete</string>
     <string name="delete_note_dialog">Delete note?</string>
     <string name="cancel_delete_button">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 </resources>

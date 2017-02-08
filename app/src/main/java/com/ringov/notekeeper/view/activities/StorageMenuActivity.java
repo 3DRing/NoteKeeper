@@ -45,6 +45,7 @@ public abstract class StorageMenuActivity extends BaseActivity implements Settin
         if (id == R.id.action_change_storage) {
             ChangeStorageDialog changeStorageDialog = new ChangeStorageDialog();
             Bundle b = new Bundle();
+            b.putInt("crt_storage_type",StorageMap.getStorageId(settingsControl.getStorageType(this)));
             b.putSerializable("callback", new ChangeStorageDialog.StorageTypeResultCallback(){ //TODO remove hardcoded text
 
                 @Override
