@@ -22,11 +22,21 @@ public class SettingsPresenter extends BasePresenter<SettingsView, SettingsModel
         model.changeCurrentStorageType(type, contextProvider);
 
         view.onStorageTypeChangedUpdate();
-        view.showMessage("Storage type has been changed\n" + type);
+        //view.showMessage("Storage type has been changed\n" + type);
     }
 
     @Override
     public StorageMap.STORAGE_TYPE getStorageType(ContextProvider contextProvider) {
         return model.getCurrentStorageType(contextProvider);
+    }
+
+    @Override
+    public void smsFetchingEnabled(boolean enabled, ContextProvider contextProvide) {
+        model.changeSmsFetchingEnabled(enabled, contextProvide);
+    }
+
+    @Override
+    public boolean isSmsFetchingEnabled(ContextProvider contextProvider) {
+        return model.isSmsFetchingEnabled(contextProvider);
     }
 }

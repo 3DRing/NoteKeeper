@@ -3,11 +3,8 @@ package com.ringov.notekeeper.view.fragments;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.Toast;
 
 import com.ringov.notekeeper.R;
 import com.ringov.notekeeper.StorageMap;
@@ -21,18 +18,36 @@ import java.io.Serializable;
 public class ChangeStorageDialog extends DialogFragment {
 
     private StorageTypeResultCallback callback;
+    private int crtValue;
+    private int newValue;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         Bundle args = getArguments();
+        crtValue = args.getInt("crt_storage_type");//todo remove hardcoded text
         callback = (StorageTypeResultCallback) args.get("callback"); //todo remove hardcoded text
 
         builder.setTitle(R.string.change_storage)
-                .setItems(StorageMap.getStorageTypeArrayRes(), new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(R.array.storage_list, crtValue,new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        callback.changeStorageType(StorageMap.getStorageType(which));
+                        ChangeStorageDialog.this.newValue = which;
+                    }
+                })
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        if(crtValue != newValue) {
+                            callback.changeStorageType(StorageMap.getStorageType(newValue));
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // nothing
                     }
                 });
 

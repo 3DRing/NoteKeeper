@@ -12,4 +12,8 @@ public interface SettingsControl extends BaseControl {
     void changeStorageType(StorageMap.STORAGE_TYPE type, ContextProvider contextProvider);
 
     StorageMap.STORAGE_TYPE getStorageType(ContextProvider contextProvider);
+
+    void smsFetchingEnabled(boolean enabled, ContextProvider contextProvide);
+
+    boolean isSmsFetchingEnabled(ContextProvider contextProvider);
 }
