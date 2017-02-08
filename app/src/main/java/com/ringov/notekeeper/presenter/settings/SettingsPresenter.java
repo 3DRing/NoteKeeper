@@ -29,4 +29,14 @@ public class SettingsPresenter extends BasePresenter<SettingsView, SettingsModel
     public StorageMap.STORAGE_TYPE getStorageType(ContextProvider contextProvider) {
         return model.getCurrentStorageType(contextProvider);
     }
+
+    @Override
+    public void smsFetchingEnabled(boolean enabled, ContextProvider contextProvide) {
+        model.changeSmsFetchingEnabled(enabled, contextProvide);
+    }
+
+    @Override
+    public boolean isSmsFetchingEnabled(ContextProvider contextProvider) {
+        return model.isSmsFetchingEnabled(contextProvider);
+    }
 }

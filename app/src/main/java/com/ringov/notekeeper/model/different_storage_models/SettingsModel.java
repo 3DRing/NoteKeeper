@@ -35,10 +35,24 @@ public class SettingsModel {
     }
 
     public static StorageMap.STORAGE_TYPE getStorageType(ContextProvider contextProvider){
-        SharedPreferences sp = contextProvider.extractContext().getSharedPreferences("notekeeper_settings", Context.MODE_PRIVATE); //todo remove hardcoded text
+        SharedPreferences sp = contextProvider.extractContext().getSharedPreferences(SHARED_PREFERENCES_TAG, Context.MODE_PRIVATE); //todo remove hardcoded text
 
         // SQLite storage by default
         int id = sp.getInt("storage_type", StorageMap.getStorageId(StorageMap.STORAGE_TYPE.SQLITE_DATABASE)); // todo remove hardcoded text
         return StorageMap.getStorageType(id);
+    }
+
+    public static boolean isSmsFetchingEnabled(ContextProvider contextProvider) {
+        SharedPreferences sp = contextProvider.extractContext().getSharedPreferences(SHARED_PREFERENCES_TAG, Context.MODE_PRIVATE); //todo remove hardcoded text
+
+        boolean enabled = sp.getBoolean("sms_fetching_enabled", false); // todo remove hardcoded text
+        return enabled;
+    }
+
+    public static void setSmsFetchingEnabled(boolean smsFetchingEnabled, ContextProvider contextProvider) {
+        SharedPreferences sp = contextProvider.extractContext().getSharedPreferences(SHARED_PREFERENCES_TAG, Context.MODE_PRIVATE); //todo remove hardcoded text
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("sms_fetching_enabled", smsFetchingEnabled);
+        editor.commit();
     }
 }

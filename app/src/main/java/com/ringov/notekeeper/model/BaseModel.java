@@ -79,6 +79,16 @@ public class BaseModel
     }
 
     @Override
+    public boolean isSmsFetchingEnabled(ContextProvider contextProvide) {
+        return SettingsModel.isSmsFetchingEnabled(contextProvide);
+    }
+
+    @Override
+    public void changeSmsFetchingEnabled(boolean enabled, ContextProvider contextProvide) {
+        SettingsModel.setSmsFetchingEnabled(enabled, contextProvide);
+    }
+
+    @Override
     public void loadNoteList(ContextProvider contextProvider) {
         List<NoteEntry> notes = dbInterface.getNoteList(contextProvider);
         noteListModelControl.sendNoteList(notes);

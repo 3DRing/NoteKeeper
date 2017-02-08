@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
+import com.ringov.notekeeper.model.ModelManager;
+import com.ringov.notekeeper.model.interfaces.SettingsModelAccess;
+import com.ringov.notekeeper.presenter.settings.SettingsModelControl;
+import com.ringov.notekeeper.view.interfaces.ContextProvider;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,7 +18,7 @@ import java.util.Date;
  * Created by Сергей on 05.02.2017.
  */
 
-public class SmsReceiver extends BroadcastReceiver {
+public class SmsReceiver extends BroadcastReceiver implements SettingsModelControl {
 
     public static class SMS implements Serializable{
 
@@ -40,7 +45,18 @@ public class SmsReceiver extends BroadcastReceiver {
         }
     }
 
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
+        ContextProvider contextProvider = new ContextProvider() {
+            @Override
+            public Context extractContext() {
+                return context;
+            }
+        };
+        SettingsModelAccess settings = ModelManager.getSettingsModel(this, contextProvider);
+        if(!settings.isSmsFetchingEnabled(contextProvider)){
+            return;
+        }
+
         Bundle bundle = intent.getExtras();
         SmsMessage[] messages = null;
         String text = "";
