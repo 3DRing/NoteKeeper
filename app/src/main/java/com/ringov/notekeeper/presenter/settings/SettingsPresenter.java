@@ -22,7 +22,7 @@ public class SettingsPresenter extends BasePresenter<SettingsView, SettingsModel
         model.changeCurrentStorageType(type, contextProvider);
 
         view.onStorageTypeChangedUpdate();
-        view.showMessage("Storage type has been changed\n" + type);
+        //view.showMessage("Storage type has been changed\n" + type);
     }
 
     @Override
