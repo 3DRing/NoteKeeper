@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:orientation="vertical">
 
@@ -22,12 +22,15 @@
             android:id="@+id/et_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="top|left"
             android:background="@android:color/transparent"
-            android:ems="10"
-            android:lines="20"
+            android:gravity="top|left"
             android:hint="@string/text_hint"
             android:inputType="textMultiLine"
-            android:textCursorDrawable="@null"/>
+            android:lines="20"
+            android:overScrollMode="always"
+            android:scrollHorizontally="true"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:textCursorDrawable="@null" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
